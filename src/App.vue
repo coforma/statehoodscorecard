@@ -4,7 +4,8 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-    <router-view/>
+
+    <router-view :key="$route.fullPath"/>
   </div>
 </template>
 
@@ -30,3 +31,16 @@
   }
 }
 </style>
+
+<script>
+import axios from 'axios';
+
+export default {
+  name: 'Bleh',
+  data () {
+    return {
+      senate: null
+    }
+  }
+}
+</script>
