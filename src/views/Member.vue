@@ -12,11 +12,12 @@
 
     <br>
 
-    <div v-for="member in members" :key="member.id">
-      <router-link
+    <div v-for="member in orderedMembers" :key="member.id">
+
+      <strong>{{ member.state }}</strong> <router-link
       :to="{ page: 'Member', params: { chamber: 'senate', state: member.state, first_name: member.first_name, last_name: member.last_name }}"
       >
-        {{ member.first_name }} {{ member.last_name }}
+         {{ member.first_name }} {{ member.last_name }}
       </router-link>
     </div>
 
@@ -29,6 +30,7 @@ import axios from 'axios';
 
 export default {
   name: 'Member',
+
   data () {
     return {
       members: '',
@@ -67,6 +69,11 @@ export default {
       this.memberState = this.$route.params.state
       this.memberFirstName = this.$route.params.first_name
       this.memberLastName = this.$route.params.last_name
+    }
+  },
+  computed: {
+    orderedMembers: function () {
+      return _.orderBy(this.members, 'state')
     }
   }
 }
